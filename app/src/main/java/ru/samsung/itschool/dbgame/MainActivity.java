@@ -13,7 +13,6 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	static DBManager dbManager;
-
 	EditText playerName;
 	TextView gameResult;
 	ImageButton playButton;
