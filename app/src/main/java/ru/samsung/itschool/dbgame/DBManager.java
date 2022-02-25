@@ -2,6 +2,9 @@ package ru.samsung.itschool.dbgame;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.SplittableRandom;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -31,8 +34,11 @@ public class DBManager {
 	}
 
 	void addResult(String username, int score) {
-		db.execSQL("INSERT INTO RESULTS VALUES ('" + username + "', " + score
-				+ ");DROP TABLE RESULTS");
+		//db.execSQL("INSERT INTO RESULTS VALUES ('" + username + "', " + score + ");DROP TABLE RESULTS");
+		ContentValues contentValues = new ContentValues();
+		contentValues.put("USERNAME", username);
+		contentValues.put("SCORE", score);
+		db.insert("RESULTS", null, contentValues);
 	}
 
 	/////////////////////////////////////////////////
@@ -70,6 +76,42 @@ public class DBManager {
 
 	private void createTablesIfNeedBe() {
 			db.execSQL("CREATE TABLE IF NOT EXISTS RESULTS (USERNAME TEXT, SCORE INTEGER);");
+	}
+
+	ArrayList<Result> getAllUserResults(String username, int minScore) {
+		ArrayList<Result> data = new ArrayList<Result>();
+
+		Cursor cursor = db.rawQuery("SELECT * FROM RESULTS WHERE USERNAME = ? AND SCORE >= ?", new String[]{username, minScore+""});
+
+		boolean hasMoreData = cursor.moveToFirst();
+
+		while (hasMoreData) {
+			String name = cursor.getString(cursor.getColumnIndex("USERNAME"));
+			int score = Integer.parseInt(cursor.getString(cursor
+					.getColumnIndex("SCORE")));
+			data.add(new Result(name, score));
+			hasMoreData = cursor.moveToNext();
+		}
+
+		return data;
+	}
+
+	ArrayList<Result> getMaxUserResults() {
+		ArrayList<Result> data = new ArrayList<Result>();
+		Cursor cursor = db.query("RESULTS", new String[]{"USERNAME", "MAX(SCORE) AS MS"}, null, null, "USERNAME", "MS > 500", "MS DESC");
+		boolean hasMoreData = cursor.moveToFirst();
+
+		while (hasMoreData) {
+			//String name = cursor.getString(cursor.getColumnIndex("USERNAME"));
+//			int score = Integer.parseInt(cursor.getString(cursor
+//					.getColumnIndex("SCORE")));
+			String name = cursor.getString(0);
+			int score = cursor.getInt(1);
+			data.add(new Result(name, score));
+			hasMoreData = cursor.moveToNext();
+		}
+
+		return data;
 	}
 
 }
