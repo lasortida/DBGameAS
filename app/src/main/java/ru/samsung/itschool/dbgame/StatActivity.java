@@ -3,6 +3,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class StatActivity extends Activity {
 
     private DBManager db;
@@ -12,8 +14,11 @@ public class StatActivity extends Activity {
         setContentView(R.layout.activity_stat);
         db = DBManager.getInstance(this);
         TextView textView = findViewById(R.id.textView);
-        int a = db.selectMax();
-        String str = "" + a;
-        textView.setText(str);
+        ArrayList<Result> data = db.getMaxUserResults();
+        String result = "";
+        for (Result res: data){
+            result += res.name + " - " + res.score + "\n";
+        }
+        textView.setText(result);
     }
 }
