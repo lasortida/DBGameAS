@@ -60,13 +60,12 @@ public class DBManager {
 
 	ArrayList<Result> getAllResults() {
 		ArrayList<Result> data = new ArrayList<Result>();
-		Cursor cursor = db.rawQuery("SELECT * FROM RESULTS ORDER BY SCORE;", null);
+		Cursor cursor = db.rawQuery("SELECT * FROM RESULTS;", null);
 		boolean hasMoreData = cursor.moveToFirst();
 
 		while (hasMoreData) {
-			String name = cursor.getString(cursor.getColumnIndex("USERNAME"));
-			int score = Integer.parseInt(cursor.getString(cursor
-					.getColumnIndex("SCORE")));
+			String name = cursor.getString(0);
+			int score = cursor.getInt(1);
 			data.add(new Result(name, score));
 			hasMoreData = cursor.moveToNext();
 		}

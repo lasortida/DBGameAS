@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/robin/StudioProjects/DBGameAS/app/src/main/res/drawable/rect.xml" value="0.1495" />
+        <entry key="..\:/Users/robin/StudioProjects/DBGameAS/app/src/main/res/layout/activity_ho_f.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/robin/StudioProjects/DBGameAS/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/robin/StudioProjects/DBGameAS/app/src/main/res/layout/activity_main_state.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/robin/StudioProjects/DBGameAS/app/src/main/res/layout/activity_stat.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/robin/StudioProjects/DBGameAS/app/src/main/res/layout/element.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_ho_f.xml" value="0.333786231884058" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_stat.xml" value="0.35625" />
